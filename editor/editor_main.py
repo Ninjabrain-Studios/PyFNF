@@ -10,7 +10,7 @@ import time
 import copy
 import random
 
-from editor.file_handler import save_map, load_map  # ton module perso
+from editor.file_handler import save_map, load_map
 
 class NotesPlayerWidget(QWidget):
     def __init__(self, editor_window):
@@ -18,7 +18,7 @@ class NotesPlayerWidget(QWidget):
         self.editor = editor_window
         self.current_time = 0.0
         self.note_radius = 15
-        self.speed = 100  # pixels par seconde
+        self.speed = 100  
         self.active = False
         self.setMinimumHeight(100)
 
@@ -44,14 +44,13 @@ class NotesPlayerWidget(QWidget):
         height = self.height()
         center_y = height // 2
 
-        # Ligne centrale
+   
         painter.setPen(QColor("#007acc"))
         painter.drawLine(0, center_y, width, center_y)
 
         if not self.active:
             return
 
-        # Affichage des notes
         for note in self.editor.map_data["notes"]:
             dt = note["time"] - self.current_time
             x = width - dt * self.speed
@@ -79,36 +78,36 @@ class EditorWindow(QMainWindow):
         self.setWindowTitle("Editor")
         self.resize(700, 600)
 
-        # Données
+       
         self.map_data = {"song": "", "bpm": 120, "notes": []}
         self.start_time = None
 
-        # Undo/Redo stack
+        # Undo/Redo
         self.history = []
         self.history_index = -1
 
-        # Player audio
+        
         self.player = QMediaPlayer()
         self.audio_output = QAudioOutput()
         self.player.setAudioOutput(self.audio_output)
 
-        # Timer update interface
+       
         self.timer = QTimer()
         self.timer.timeout.connect(self.update_time_label)
 
-        # Directions fixes
+       
         self.directions = ["left", "down", "up", "right"]
 
-        # Widget visuel des notes en lecture
+      
         self.notes_player = NotesPlayerWidget(self)
 
-        # UI Setup
+        
         self.setup_ui()
 
     def setup_ui(self):
         main_layout = QVBoxLayout()
 
-        # --- Top control buttons ---
+     
         top_btn_layout = QHBoxLayout()
         self.btn_choose_song = QPushButton("🎵 Choisir musique")
         self.btn_play = QPushButton("▶️ Lecture")
@@ -128,11 +127,11 @@ class EditorWindow(QMainWindow):
 
         main_layout.addLayout(top_btn_layout)
 
-        # --- Time label ---
+    
         self.time_label = QLabel("Temps : 0.00s")
         main_layout.addWidget(self.time_label)
 
-        # --- Notes list ---
+   
         self.note_list = QListWidget()
         self.note_list.setSelectionMode(QAbstractItemView.SingleSelection)
         self.note_list.setDragDropMode(QAbstractItemView.InternalMove)
@@ -140,10 +139,10 @@ class EditorWindow(QMainWindow):
         self.note_list.model().rowsMoved.connect(self.on_notes_reordered)
         main_layout.addWidget(self.note_list, 1)
 
-        # --- Notes player visuel ---
+    
         main_layout.addWidget(self.notes_player)
 
-        # --- Editing fields ---
+ 
         edit_layout = QHBoxLayout()
         self.edit_time = QLineEdit()
         self.edit_time.setPlaceholderText("Temps (ex: 12.34)")
@@ -155,12 +154,11 @@ class EditorWindow(QMainWindow):
         edit_layout.addWidget(self.btn_apply_edit)
         main_layout.addLayout(edit_layout)
 
-        # Container widget
+    
         container = QWidget()
         container.setLayout(main_layout)
         self.setCentralWidget(container)
 
-        # Connect signals
         self.btn_choose_song.clicked.connect(self.choose_song)
         self.btn_play.clicked.connect(self.play_music)
         self.btn_pause.clicked.connect(self.pause_music)
@@ -212,7 +210,7 @@ class EditorWindow(QMainWindow):
             QMessageBox.warning(self, "Erreur", "Lancez la musique pour ajouter des notes.")
             return
         current_time = time.perf_counter() - self.start_time
-        direction = random.choice(self.directions)  # <-- ici on prend une direction aléatoire
+        direction = random.choice(self.directions)  # <-- ici on prend une direction aléatoire -> merci chatgpt
         note = {"time": round(current_time, 2), "direction": direction}
         self.map_data["notes"].append(note)
         self.push_history()
