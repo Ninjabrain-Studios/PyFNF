@@ -27,4 +27,4 @@ Each mod must contain:
 
 ## Setting Up PyFNF
 
-Download -> [Click Here](https://api.github.com/repos/Ninjabrain-Studios/PyFNF/releases/latest)
+Download The Release and launch the .exe, thats all!
