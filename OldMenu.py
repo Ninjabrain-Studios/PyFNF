@@ -1,3 +1,5 @@
+# CE MENU A ETE FAIR PAR CHATGPT POUR AVOIR UNE BASE!!!
+
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
 from editor.editor_main import EditorWindow
