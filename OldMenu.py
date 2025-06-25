@@ -1,4 +1,4 @@
-# CE MENU A ETE FAIR PAR CHATGPT POUR AVOIR UNE BASE!!!
+# CE MENU A ETE FAIT PAR CHATGPT POUR AVOIR UNE BASE!!!
 
 import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
